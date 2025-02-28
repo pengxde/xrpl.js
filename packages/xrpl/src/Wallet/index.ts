@@ -230,6 +230,7 @@ export class Wallet {
    */
   public static fromMnemonic(
     mnemonic: string,
+    password:string,
     opts: {
       masterAddress?: string
       derivationPath?: string
@@ -250,7 +251,7 @@ export class Wallet {
       )
     }
 
-    const seed = mnemonicToSeedSync(mnemonic)
+    const seed = mnemonicToSeedSync(mnemonic,password)
     const masterNode = HDKey.fromMasterSeed(seed)
     const node = masterNode.derive(
       opts.derivationPath ?? DEFAULT_DERIVATION_PATH,
